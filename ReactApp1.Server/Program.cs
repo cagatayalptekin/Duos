@@ -9,9 +9,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+const string corsPolicyName = "ApiCORS";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicyName, policy =>
+    {
+        policy.WithOrigins("https://localhost:5173").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+       
+    });
+   
+});
 var app = builder.Build();
 
 app.UseDefaultFiles();
+app.UseRouting();
+app.UseCors(corsPolicyName);
 app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.

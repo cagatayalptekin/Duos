@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ReactApp1.Server.Models;
 
 namespace ReactApp1.Server.Controllers
 {
@@ -12,10 +13,10 @@ namespace ReactApp1.Server.Controllers
         {
             _emailSender = emailSender;
         }
-        [HttpGet("send")]
-        public void SendEmail()
+        [HttpPost("send")]
+        public void SendEmail(Form form)
         {
-            _emailSender.SendEmail("cagatayalp038@gmail.com", "NEWMAIL");
+            _emailSender.SendEmail("cagatayalp038@gmail.com", form);
         }
     }
 }
